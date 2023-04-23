@@ -1,0 +1,886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ВодоканалModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Абонент">
+          <Key>
+            <PropertyRef Name="Id абонента" />
+          </Key>
+          <Property Name="Id абонента" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Дата подключения" Type="date" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Директор">
+          <Key>
+            <PropertyRef Name="Id директора" />
+          </Key>
+          <Property Name="Id директора" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Диспетчер">
+          <Key>
+            <PropertyRef Name="Id диспетчера" />
+          </Key>
+          <Property Name="Id диспетчера" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Заявка">
+          <Key>
+            <PropertyRef Name="Id заявки" />
+          </Key>
+          <Property Name="Id заявки" Type="int" Nullable="false" />
+          <Property Name="Id абонента" Type="int" Nullable="false" />
+          <Property Name="Id сотрудника" Type="int" />
+          <Property Name="Текст заявки" Type="text" Nullable="false" />
+          <Property Name="Статус заявки" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Лаборатория">
+          <Key>
+            <PropertyRef Name="Id лаборатории" />
+          </Key>
+          <Property Name="Id лаборатории" Type="int" Nullable="false" />
+          <Property Name="Название лаборатории" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес лаборатории" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Показания счётчиков">
+          <Key>
+            <PropertyRef Name="Id показаний" />
+          </Key>
+          <Property Name="Id абонента" Type="int" Nullable="false" />
+          <Property Name="Показания счётчика хол. воды" Type="float" Nullable="false" />
+          <Property Name="Показания счётчика гор. воды" Type="float" Nullable="false" />
+          <Property Name="Дата передачи показаний" Type="date" Nullable="false" />
+          <Property Name="Id показаний" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Поставщик">
+          <Key>
+            <PropertyRef Name="Id поставщика" />
+          </Key>
+          <Property Name="Id поставщика" Type="int" Nullable="false" />
+          <Property Name="Адрес поставщика" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Проба">
+          <Key>
+            <PropertyRef Name="Id пробы" />
+          </Key>
+          <Property Name="Id пробы" Type="int" Nullable="false" />
+          <Property Name="Качеcтво воды, %" Type="int" Nullable="false" />
+          <Property Name="Id лабораториии" Type="int" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Дата отбора" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сервис прокладки труб">
+          <Key>
+            <PropertyRef Name="Id сервиса" />
+          </Key>
+          <Property Name="Id сервиса" Type="int" Nullable="false" />
+          <Property Name="Название сервиса" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес сервиса" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Техническая информация">
+          <Key>
+            <PropertyRef Name="Id участка" />
+          </Key>
+          <Property Name="Id поставщика" Type="int" Nullable="false" />
+          <Property Name="Дата прокладки труб" Type="date" Nullable="false" />
+          <Property Name="Срок службы, лет" Type="int" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Id сервиса" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Технический сотрудник">
+          <Key>
+            <PropertyRef Name="Id сотрудника" />
+          </Key>
+          <Property Name="Id сотрудника" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Занятость" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Участок">
+          <Key>
+            <PropertyRef Name="Id участка" />
+          </Key>
+          <Property Name="Id участка" Type="int" Nullable="false" />
+          <Property Name="Адрес участка" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Абонент_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Абонент">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Директор_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Директор" Type="Self.Директор" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Директор">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Диспетчер_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Диспетчер" Type="Self.Диспетчер" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Диспетчер">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_Абонент">
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Абонент">
+              <PropertyRef Name="Id абонента" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="Id абонента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_Технический сотрудник">
+          <End Role="Технический сотрудник" Type="Self.Технический сотрудник" Multiplicity="0..1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Технический сотрудник">
+              <PropertyRef Name="Id сотрудника" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="Id сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания счётчиков_Абонент">
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="1" />
+          <End Role="Показания счётчиков" Type="Self.Показания счётчиков" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Абонент">
+              <PropertyRef Name="Id абонента" />
+            </Principal>
+            <Dependent Role="Показания счётчиков">
+              <PropertyRef Name="Id абонента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проба_Лаборатория">
+          <End Role="Лаборатория" Type="Self.Лаборатория" Multiplicity="1" />
+          <End Role="Проба" Type="Self.Проба" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Лаборатория">
+              <PropertyRef Name="Id лаборатории" />
+            </Principal>
+            <Dependent Role="Проба">
+              <PropertyRef Name="Id лабораториии" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проба_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Проба" Type="Self.Проба" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Проба">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая информация_Поставщик">
+          <End Role="Поставщик" Type="Self.Поставщик" Multiplicity="1" />
+          <End Role="Техническая информация" Type="Self.Техническая информация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщик">
+              <PropertyRef Name="Id поставщика" />
+            </Principal>
+            <Dependent Role="Техническая информация">
+              <PropertyRef Name="Id поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая информация_Сервис прокладки труб">
+          <End Role="Сервис прокладки труб" Type="Self.Сервис прокладки труб" Multiplicity="1" />
+          <End Role="Техническая информация" Type="Self.Техническая информация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сервис прокладки труб">
+              <PropertyRef Name="Id сервиса" />
+            </Principal>
+            <Dependent Role="Техническая информация">
+              <PropertyRef Name="Id сервиса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая информация_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Техническая информация" Type="Self.Техническая информация" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Техническая информация">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Технический сотрудник_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Технический сотрудник" Type="Self.Технический сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id участка" />
+            </Principal>
+            <Dependent Role="Технический сотрудник">
+              <PropertyRef Name="Id участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ВодоканалModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Абонент" EntityType="Self.Абонент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Директор" EntityType="Self.Директор" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Диспетчер" EntityType="Self.Диспетчер" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заявка" EntityType="Self.Заявка" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Лаборатория" EntityType="Self.Лаборатория" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Показания счётчиков" EntityType="Self.Показания счётчиков" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставщик" EntityType="Self.Поставщик" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Проба" EntityType="Self.Проба" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сервис прокладки труб" EntityType="Self.Сервис прокладки труб" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Техническая информация" EntityType="Self.Техническая информация" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Технический сотрудник" EntityType="Self.Технический сотрудник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Участок" EntityType="Self.Участок" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Абонент_Участок" Association="Self.FK_Абонент_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Абонент" EntitySet="Абонент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Директор_Участок" Association="Self.FK_Директор_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Директор" EntitySet="Директор" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Диспетчер_Участок" Association="Self.FK_Диспетчер_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Диспетчер" EntitySet="Диспетчер" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_Абонент" Association="Self.FK_Заявка_Абонент">
+            <End Role="Абонент" EntitySet="Абонент" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_Технический сотрудник" Association="Self.FK_Заявка_Технический сотрудник">
+            <End Role="Технический сотрудник" EntitySet="Технический сотрудник" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания счётчиков_Абонент" Association="Self.FK_Показания счётчиков_Абонент">
+            <End Role="Абонент" EntitySet="Абонент" />
+            <End Role="Показания счётчиков" EntitySet="Показания счётчиков" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проба_Лаборатория" Association="Self.FK_Проба_Лаборатория">
+            <End Role="Лаборатория" EntitySet="Лаборатория" />
+            <End Role="Проба" EntitySet="Проба" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проба_Участок" Association="Self.FK_Проба_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Проба" EntitySet="Проба" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая информация_Поставщик" Association="Self.FK_Техническая информация_Поставщик">
+            <End Role="Поставщик" EntitySet="Поставщик" />
+            <End Role="Техническая информация" EntitySet="Техническая информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая информация_Сервис прокладки труб" Association="Self.FK_Техническая информация_Сервис прокладки труб">
+            <End Role="Сервис прокладки труб" EntitySet="Сервис прокладки труб" />
+            <End Role="Техническая информация" EntitySet="Техническая информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая информация_Участок" Association="Self.FK_Техническая информация_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Техническая информация" EntitySet="Техническая информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Технический сотрудник_Участок" Association="Self.FK_Технический сотрудник_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Технический сотрудник" EntitySet="Технический сотрудник" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ВодоканалModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Абонент">
+          <Key>
+            <PropertyRef Name="Id_абонента" />
+          </Key>
+          <Property Name="Id_абонента" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Дата_подключения" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Абонент_Участок" FromRole="Абонент" ToRole="Участок" />
+          <NavigationProperty Name="Заявка" Relationship="Self.FK_Заявка_Абонент" FromRole="Абонент" ToRole="Заявка" />
+          <NavigationProperty Name="Показания_счётчиков" Relationship="Self.FK_Показания_счётчиков_Абонент" FromRole="Абонент" ToRole="Показания_счётчиков" />
+        </EntityType>
+        <EntityType Name="Директор">
+          <Key>
+            <PropertyRef Name="Id_директора" />
+          </Key>
+          <Property Name="Id_директора" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Директор_Участок" FromRole="Директор" ToRole="Участок" />
+        </EntityType>
+        <EntityType Name="Диспетчер">
+          <Key>
+            <PropertyRef Name="Id_диспетчера" />
+          </Key>
+          <Property Name="Id_диспетчера" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Диспетчер_Участок" FromRole="Диспетчер" ToRole="Участок" />
+        </EntityType>
+        <EntityType Name="Заявка">
+          <Key>
+            <PropertyRef Name="Id_заявки" />
+          </Key>
+          <Property Name="Id_заявки" Type="Int32" Nullable="false" />
+          <Property Name="Id_абонента" Type="Int32" Nullable="false" />
+          <Property Name="Id_сотрудника" Type="Int32" />
+          <Property Name="Текст_заявки" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Статус_заявки" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Абонент" Relationship="Self.FK_Заявка_Абонент" FromRole="Заявка" ToRole="Абонент" />
+          <NavigationProperty Name="Технический_сотрудник" Relationship="Self.FK_Заявка_Технический_сотрудник" FromRole="Заявка" ToRole="Технический_сотрудник" />
+        </EntityType>
+        <EntityType Name="Лаборатория">
+          <Key>
+            <PropertyRef Name="Id_лаборатории" />
+          </Key>
+          <Property Name="Id_лаборатории" Type="Int32" Nullable="false" />
+          <Property Name="Название_лаборатории" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Адрес_лаборатории" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Проба" Relationship="Self.FK_Проба_Лаборатория" FromRole="Лаборатория" ToRole="Проба" />
+        </EntityType>
+        <EntityType Name="Показания_счётчиков">
+          <Key>
+            <PropertyRef Name="Id_показаний" />
+          </Key>
+          <Property Name="Id_абонента" Type="Int32" Nullable="false" />
+          <Property Name="Показания_счётчика_хол__воды" Type="Double" Nullable="false" />
+          <Property Name="Показания_счётчика_гор__воды" Type="Double" Nullable="false" />
+          <Property Name="Дата_передачи_показаний" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_показаний" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Абонент" Relationship="Self.FK_Показания_счётчиков_Абонент" FromRole="Показания_счётчиков" ToRole="Абонент" />
+        </EntityType>
+        <EntityType Name="Поставщик">
+          <Key>
+            <PropertyRef Name="Id_поставщика" />
+          </Key>
+          <Property Name="Id_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Адрес_поставщика" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Техническая_информация" Relationship="Self.FK_Техническая_информация_Поставщик" FromRole="Поставщик" ToRole="Техническая_информация" />
+        </EntityType>
+        <EntityType Name="Проба">
+          <Key>
+            <PropertyRef Name="Id_пробы" />
+          </Key>
+          <Property Name="Id_пробы" Type="Int32" Nullable="false" />
+          <Property Name="Качеcтво_воды___" Type="Int32" Nullable="false" />
+          <Property Name="Id_лабораториии" Type="Int32" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Дата_отбора" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Лаборатория" Relationship="Self.FK_Проба_Лаборатория" FromRole="Проба" ToRole="Лаборатория" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Проба_Участок" FromRole="Проба" ToRole="Участок" />
+        </EntityType>
+        <EntityType Name="Сервис_прокладки_труб">
+          <Key>
+            <PropertyRef Name="Id_сервиса" />
+          </Key>
+          <Property Name="Id_сервиса" Type="Int32" Nullable="false" />
+          <Property Name="Название_сервиса" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Адрес_сервиса" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Техническая_информация" Relationship="Self.FK_Техническая_информация_Сервис_прокладки_труб" FromRole="Сервис_прокладки_труб" ToRole="Техническая_информация" />
+        </EntityType>
+        <EntityType Name="Техническая_информация">
+          <Key>
+            <PropertyRef Name="Id_участка" />
+          </Key>
+          <Property Name="Id_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Дата_прокладки_труб" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Срок_службы__лет" Type="Int32" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Id_сервиса" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Поставщик" Relationship="Self.FK_Техническая_информация_Поставщик" FromRole="Техническая_информация" ToRole="Поставщик" />
+          <NavigationProperty Name="Сервис_прокладки_труб" Relationship="Self.FK_Техническая_информация_Сервис_прокладки_труб" FromRole="Техническая_информация" ToRole="Сервис_прокладки_труб" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Техническая_информация_Участок" FromRole="Техническая_информация" ToRole="Участок" />
+        </EntityType>
+        <EntityType Name="Технический_сотрудник">
+          <Key>
+            <PropertyRef Name="Id_сотрудника" />
+          </Key>
+          <Property Name="Id_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Занятость" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Заявка" Relationship="Self.FK_Заявка_Технический_сотрудник" FromRole="Технический_сотрудник" ToRole="Заявка" />
+          <NavigationProperty Name="Участок" Relationship="Self.FK_Технический_сотрудник_Участок" FromRole="Технический_сотрудник" ToRole="Участок" />
+        </EntityType>
+        <EntityType Name="Участок">
+          <Key>
+            <PropertyRef Name="Id_участка" />
+          </Key>
+          <Property Name="Id_участка" Type="Int32" Nullable="false" />
+          <Property Name="Адрес_участка" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Абонент" Relationship="Self.FK_Абонент_Участок" FromRole="Участок" ToRole="Абонент" />
+          <NavigationProperty Name="Директор" Relationship="Self.FK_Директор_Участок" FromRole="Участок" ToRole="Директор" />
+          <NavigationProperty Name="Диспетчер" Relationship="Self.FK_Диспетчер_Участок" FromRole="Участок" ToRole="Диспетчер" />
+          <NavigationProperty Name="Проба" Relationship="Self.FK_Проба_Участок" FromRole="Участок" ToRole="Проба" />
+          <NavigationProperty Name="Техническая_информация" Relationship="Self.FK_Техническая_информация_Участок" FromRole="Участок" ToRole="Техническая_информация" />
+          <NavigationProperty Name="Технический_сотрудник" Relationship="Self.FK_Технический_сотрудник_Участок" FromRole="Участок" ToRole="Технический_сотрудник" />
+        </EntityType>
+        <Association Name="FK_Абонент_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Абонент">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_Абонент">
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Абонент">
+              <PropertyRef Name="Id_абонента" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="Id_абонента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_счётчиков_Абонент">
+          <End Role="Абонент" Type="Self.Абонент" Multiplicity="1" />
+          <End Role="Показания_счётчиков" Type="Self.Показания_счётчиков" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Абонент">
+              <PropertyRef Name="Id_абонента" />
+            </Principal>
+            <Dependent Role="Показания_счётчиков">
+              <PropertyRef Name="Id_абонента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Директор_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Директор" Type="Self.Директор" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Директор">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Диспетчер_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Диспетчер" Type="Self.Диспетчер" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Диспетчер">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заявка_Технический_сотрудник">
+          <End Role="Технический_сотрудник" Type="Self.Технический_сотрудник" Multiplicity="0..1" />
+          <End Role="Заявка" Type="Self.Заявка" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Технический_сотрудник">
+              <PropertyRef Name="Id_сотрудника" />
+            </Principal>
+            <Dependent Role="Заявка">
+              <PropertyRef Name="Id_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проба_Лаборатория">
+          <End Role="Лаборатория" Type="Self.Лаборатория" Multiplicity="1" />
+          <End Role="Проба" Type="Self.Проба" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Лаборатория">
+              <PropertyRef Name="Id_лаборатории" />
+            </Principal>
+            <Dependent Role="Проба">
+              <PropertyRef Name="Id_лабораториии" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая_информация_Поставщик">
+          <End Role="Поставщик" Type="Self.Поставщик" Multiplicity="1" />
+          <End Role="Техническая_информация" Type="Self.Техническая_информация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщик">
+              <PropertyRef Name="Id_поставщика" />
+            </Principal>
+            <Dependent Role="Техническая_информация">
+              <PropertyRef Name="Id_поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проба_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Проба" Type="Self.Проба" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Проба">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая_информация_Сервис_прокладки_труб">
+          <End Role="Сервис_прокладки_труб" Type="Self.Сервис_прокладки_труб" Multiplicity="1" />
+          <End Role="Техническая_информация" Type="Self.Техническая_информация" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сервис_прокладки_труб">
+              <PropertyRef Name="Id_сервиса" />
+            </Principal>
+            <Dependent Role="Техническая_информация">
+              <PropertyRef Name="Id_сервиса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническая_информация_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Техническая_информация" Type="Self.Техническая_информация" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Техническая_информация">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Технический_сотрудник_Участок">
+          <End Role="Участок" Type="Self.Участок" Multiplicity="1" />
+          <End Role="Технический_сотрудник" Type="Self.Технический_сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Участок">
+              <PropertyRef Name="Id_участка" />
+            </Principal>
+            <Dependent Role="Технический_сотрудник">
+              <PropertyRef Name="Id_участка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ВодоканалEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Абонент" EntityType="Self.Абонент" />
+          <EntitySet Name="Директор" EntityType="Self.Директор" />
+          <EntitySet Name="Диспетчер" EntityType="Self.Диспетчер" />
+          <EntitySet Name="Заявка" EntityType="Self.Заявка" />
+          <EntitySet Name="Лаборатория" EntityType="Self.Лаборатория" />
+          <EntitySet Name="Показания_счётчиков" EntityType="Self.Показания_счётчиков" />
+          <EntitySet Name="Поставщик" EntityType="Self.Поставщик" />
+          <EntitySet Name="Проба" EntityType="Self.Проба" />
+          <EntitySet Name="Сервис_прокладки_труб" EntityType="Self.Сервис_прокладки_труб" />
+          <EntitySet Name="Техническая_информация" EntityType="Self.Техническая_информация" />
+          <EntitySet Name="Технический_сотрудник" EntityType="Self.Технический_сотрудник" />
+          <EntitySet Name="Участок" EntityType="Self.Участок" />
+          <AssociationSet Name="FK_Абонент_Участок" Association="Self.FK_Абонент_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Абонент" EntitySet="Абонент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_Абонент" Association="Self.FK_Заявка_Абонент">
+            <End Role="Абонент" EntitySet="Абонент" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_счётчиков_Абонент" Association="Self.FK_Показания_счётчиков_Абонент">
+            <End Role="Абонент" EntitySet="Абонент" />
+            <End Role="Показания_счётчиков" EntitySet="Показания_счётчиков" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Директор_Участок" Association="Self.FK_Директор_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Директор" EntitySet="Директор" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Диспетчер_Участок" Association="Self.FK_Диспетчер_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Диспетчер" EntitySet="Диспетчер" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заявка_Технический_сотрудник" Association="Self.FK_Заявка_Технический_сотрудник">
+            <End Role="Технический_сотрудник" EntitySet="Технический_сотрудник" />
+            <End Role="Заявка" EntitySet="Заявка" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проба_Лаборатория" Association="Self.FK_Проба_Лаборатория">
+            <End Role="Лаборатория" EntitySet="Лаборатория" />
+            <End Role="Проба" EntitySet="Проба" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая_информация_Поставщик" Association="Self.FK_Техническая_информация_Поставщик">
+            <End Role="Поставщик" EntitySet="Поставщик" />
+            <End Role="Техническая_информация" EntitySet="Техническая_информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проба_Участок" Association="Self.FK_Проба_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Проба" EntitySet="Проба" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая_информация_Сервис_прокладки_труб" Association="Self.FK_Техническая_информация_Сервис_прокладки_труб">
+            <End Role="Сервис_прокладки_труб" EntitySet="Сервис_прокладки_труб" />
+            <End Role="Техническая_информация" EntitySet="Техническая_информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническая_информация_Участок" Association="Self.FK_Техническая_информация_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Техническая_информация" EntitySet="Техническая_информация" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Технический_сотрудник_Участок" Association="Self.FK_Технический_сотрудник_Участок">
+            <End Role="Участок" EntitySet="Участок" />
+            <End Role="Технический_сотрудник" EntitySet="Технический_сотрудник" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ВодоканалModelStoreContainer" CdmEntityContainer="ВодоканалEntities2">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ВодоканалModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Абонент">
+            <EntityTypeMapping TypeName="ВодоканалModel.Абонент">
+              <MappingFragment StoreEntitySet="Абонент">
+                <ScalarProperty Name="Id_абонента" ColumnName="Id абонента" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Дата_подключения" ColumnName="Дата подключения" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Директор">
+            <EntityTypeMapping TypeName="ВодоканалModel.Директор">
+              <MappingFragment StoreEntitySet="Директор">
+                <ScalarProperty Name="Id_директора" ColumnName="Id директора" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Диспетчер">
+            <EntityTypeMapping TypeName="ВодоканалModel.Диспетчер">
+              <MappingFragment StoreEntitySet="Диспетчер">
+                <ScalarProperty Name="Id_диспетчера" ColumnName="Id диспетчера" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заявка">
+            <EntityTypeMapping TypeName="ВодоканалModel.Заявка">
+              <MappingFragment StoreEntitySet="Заявка">
+                <ScalarProperty Name="Id_заявки" ColumnName="Id заявки" />
+                <ScalarProperty Name="Id_абонента" ColumnName="Id абонента" />
+                <ScalarProperty Name="Id_сотрудника" ColumnName="Id сотрудника" />
+                <ScalarProperty Name="Текст_заявки" ColumnName="Текст заявки" />
+                <ScalarProperty Name="Статус_заявки" ColumnName="Статус заявки" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Лаборатория">
+            <EntityTypeMapping TypeName="ВодоканалModel.Лаборатория">
+              <MappingFragment StoreEntitySet="Лаборатория">
+                <ScalarProperty Name="Id_лаборатории" ColumnName="Id лаборатории" />
+                <ScalarProperty Name="Название_лаборатории" ColumnName="Название лаборатории" />
+                <ScalarProperty Name="Адрес_лаборатории" ColumnName="Адрес лаборатории" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Показания_счётчиков">
+            <EntityTypeMapping TypeName="ВодоканалModel.Показания_счётчиков">
+              <MappingFragment StoreEntitySet="Показания счётчиков">
+                <ScalarProperty Name="Id_абонента" ColumnName="Id абонента" />
+                <ScalarProperty Name="Показания_счётчика_хол__воды" ColumnName="Показания счётчика хол. воды" />
+                <ScalarProperty Name="Показания_счётчика_гор__воды" ColumnName="Показания счётчика гор. воды" />
+                <ScalarProperty Name="Дата_передачи_показаний" ColumnName="Дата передачи показаний" />
+                <ScalarProperty Name="Id_показаний" ColumnName="Id показаний" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставщик">
+            <EntityTypeMapping TypeName="ВодоканалModel.Поставщик">
+              <MappingFragment StoreEntitySet="Поставщик">
+                <ScalarProperty Name="Id_поставщика" ColumnName="Id поставщика" />
+                <ScalarProperty Name="Адрес_поставщика" ColumnName="Адрес поставщика" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Проба">
+            <EntityTypeMapping TypeName="ВодоканалModel.Проба">
+              <MappingFragment StoreEntitySet="Проба">
+                <ScalarProperty Name="Id_пробы" ColumnName="Id пробы" />
+                <ScalarProperty Name="Качеcтво_воды___" ColumnName="Качеcтво воды, %" />
+                <ScalarProperty Name="Id_лабораториии" ColumnName="Id лабораториии" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Дата_отбора" ColumnName="Дата отбора" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сервис_прокладки_труб">
+            <EntityTypeMapping TypeName="ВодоканалModel.Сервис_прокладки_труб">
+              <MappingFragment StoreEntitySet="Сервис прокладки труб">
+                <ScalarProperty Name="Id_сервиса" ColumnName="Id сервиса" />
+                <ScalarProperty Name="Название_сервиса" ColumnName="Название сервиса" />
+                <ScalarProperty Name="Адрес_сервиса" ColumnName="Адрес сервиса" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Техническая_информация">
+            <EntityTypeMapping TypeName="ВодоканалModel.Техническая_информация">
+              <MappingFragment StoreEntitySet="Техническая информация">
+                <ScalarProperty Name="Id_поставщика" ColumnName="Id поставщика" />
+                <ScalarProperty Name="Дата_прокладки_труб" ColumnName="Дата прокладки труб" />
+                <ScalarProperty Name="Срок_службы__лет" ColumnName="Срок службы, лет" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Id_сервиса" ColumnName="Id сервиса" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Технический_сотрудник">
+            <EntityTypeMapping TypeName="ВодоканалModel.Технический_сотрудник">
+              <MappingFragment StoreEntitySet="Технический сотрудник">
+                <ScalarProperty Name="Id_сотрудника" ColumnName="Id сотрудника" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Занятость" ColumnName="Занятость" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Участок">
+            <EntityTypeMapping TypeName="ВодоканалModel.Участок">
+              <MappingFragment StoreEntitySet="Участок">
+                <ScalarProperty Name="Id_участка" ColumnName="Id участка" />
+                <ScalarProperty Name="Адрес_участка" ColumnName="Адрес участка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

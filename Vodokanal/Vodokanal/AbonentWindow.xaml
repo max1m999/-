@@ -1,0 +1,37 @@
+﻿<Window x:Class="Vodokanal.AbonentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vodokanal"
+        mc:Ignorable="d"
+        Title="AbonentWindow" Height="450" Width="1045" Background="#FF1E154A">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="191*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Показания счётчиков" Margin="0,0,0,178" Foreground="White" HorizontalAlignment="Left" Width="546" Grid.ColumnSpan="2">
+            <DataGrid x:Name="Pokazania_list" AutoGenerateColumns="False" HorizontalAlignment="Center" SelectionChanged="Pokazania_list_SelectionChanged"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Показания_счётчика_гор__воды }" Header="Счётчик гор. воды"  Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Показания_счётчика_хол__воды }" Header="Счётчик хол. воды"  Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Дата_передачи_показаний }" Header="Дата передачи показаний" Width="*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Передать показания счётчиков" Margin="45,261,0,0" Foreground="White" HorizontalAlignment="Left" Width="384" Height="154" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Grid Height="95">
+                <Label Content="Счётчик гор. воды:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <Label Content="Счётчик хол. воды:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+                <TextBox x:Name="Hot" HorizontalAlignment="Left" Margin="186,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" FontSize="16"/>
+                <TextBox x:Name="Cold" HorizontalAlignment="Left" Margin="186,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" FontSize="16"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="Send_pokazania" Content="Передать &#xD;&#xA;показания" Margin="354,319,0,0" VerticalAlignment="Top" Height="48" HorizontalAlignment="Left" Width="124" Grid.Column="1" Click="Send_pokazania_Click"/>
+        <Button Content="Отправить заявку" HorizontalAlignment="Left" Margin="700,298,0,0" VerticalAlignment="Top" Width="128" Height="40" Grid.Column="1" Click="Button_Click"/>
+        <TextBox x:Name="Zayavka" HorizontalAlignment="Left" Margin="558,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" FontSize="16" Grid.Column="1" Height="219"/>
+        <Label Grid.Column="1" Content="Возникла проблема? Оставьте заявку ниже:" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FFF7F7F7"/>
+
+    </Grid>
+</Window>

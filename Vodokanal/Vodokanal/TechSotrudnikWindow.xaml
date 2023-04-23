@@ -1,0 +1,25 @@
+﻿<Window x:Class="Vodokanal.TechSotrudnikWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vodokanal"
+        mc:Ignorable="d"
+        Title="TechSotrudnikWindow" Height="450" Width="480" Background="#FF1E154A">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="209*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dg_zayavki"  Margin="0,0,0,72" AutoGenerateColumns="False" Grid.ColumnSpan="2" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID заявки" Binding="{Binding Id_заявки}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="ID абонента" Binding="{Binding Id_абонента}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус заявки" Binding="{Binding Статус_заявки}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="check_zayavku" Content="Просмотреть заявку" HorizontalAlignment="Left" Margin="45,387,0,0" VerticalAlignment="Top" Height="37" Width="151" Grid.ColumnSpan="2" Click="check_zayavku_Click" />
+        <Button x:Name="close_zayavku" Content="Закрыть заявку" HorizontalAlignment="Left" Margin="227,387,0,0" VerticalAlignment="Top" Height="37" Width="151" Grid.Column="1" Click="close_zayavku_Click"/>
+
+    </Grid>
+</Window>

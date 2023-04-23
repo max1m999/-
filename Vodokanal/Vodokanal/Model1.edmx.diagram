@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a1435c90e3e43d3b305a56ac1ac62ca" Name="Diagram1">
+        <EntityTypeShape EntityType="ВодоканалModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Абонент" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Директор" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Диспетчер" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Заявка" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Лаборатория" Width="1.5" PointX="0.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Показания_счётчиков" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Поставщик" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Проба" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Сервис_прокладки_труб" Width="1.5" PointX="5.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Техническая_информация" Width="1.5" PointX="8" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Технический_сотрудник" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ВодоканалModel.Участок" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="ВодоканалModel.FK_Абонент_Участок" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Заявка_Абонент" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Показания_счётчиков_Абонент" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Директор_Участок" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Диспетчер_Участок" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Заявка_Технический_сотрудник" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Проба_Лаборатория" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Техническая_информация_Поставщик" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Проба_Участок" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Техническая_информация_Сервис_прокладки_труб" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Техническая_информация_Участок" ManuallyRouted="false" />
+        <AssociationConnector Association="ВодоканалModel.FK_Технический_сотрудник_Участок" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
